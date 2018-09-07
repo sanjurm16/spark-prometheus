@@ -1,2 +1,5 @@
 .venv
 .idea
+build
+dist
+spark_prometheus.egg-info
