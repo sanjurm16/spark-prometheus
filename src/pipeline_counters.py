@@ -1,5 +1,7 @@
 from prometheus_client.core import Counter
 
+from src.instrumentation import periodic_flush_metrics
+
 
 class PipelineCounters:
 
