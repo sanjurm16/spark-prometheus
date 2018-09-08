@@ -3,12 +3,16 @@ import time
 
 import atexit
 from prometheus_client import multiprocess
-from prometheus_client.core import CollectorRegistry
+from prometheus_client.core import REGISTRY
 from prometheus_client.exposition import write_to_textfile
 
 _LAST__FLUSHED_TIME = 0
+prom_dir = '/tmp/prom/'
+if not os.path.exists(prom_dir):
+    os.makedirs(prom_dir)
+os.environ['prometheus_multiproc_dir'] = prom_dir
 
-registry = CollectorRegistry()
+registry = REGISTRY
 multiprocess.MultiProcessCollector(registry)
 
 
@@ -22,10 +26,7 @@ def set_last_flushed_time(value: int):
 
 
 def flush_metrics():
-    prom_dir = '/var/log/textcollector'
-    if not os.path.exists(prom_dir):
-        os.makedirs(prom_dir)
-    write_to_textfile(prom_dir, registry=registry)
+    write_to_textfile(prom_dir+'pipeline.prom', registry=registry)
 
 
 def periodic_flush_metrics():
@@ -37,5 +38,5 @@ def periodic_flush_metrics():
         set_last_flushed_time(current_time)
 
 
-atexit.register(flush_metrics())
+atexit.register(flush_metrics)
 
