@@ -3,7 +3,7 @@ import argparse
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
 
-from src.pipeline_counters import PipelineCounters
+from pipeline_counters import PipelineCounters
 
 
 def main(spark: SparkSession, input_path: str, output_path: str):
