@@ -15,6 +15,7 @@ def main(spark: SparkSession, input_path: str, output_path: str):
 
 if __name__ == '__main__':
     spark_session = SparkSession(SparkContext.getOrCreate())
+    SparkContext.addPyFile(path='dependencies.zip')
     parser = argparse.ArgumentParser(description='spark some files')
     parser.add_argument("csv_file_ip_path", help="location of some csv files")
     parser.add_argument("parquet_file_op_path", help="location of output path")
