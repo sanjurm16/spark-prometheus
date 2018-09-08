@@ -3,7 +3,7 @@ setup(
     name="spark-prometheus",
     version="0.1",
     scripts=['src/main.py'],
-    install_requires=['pyspark'],
+    install_requires=['pyspark', 'prometheus_client'],
     packages=['src'],
     author="Sanjay Mishra",
     author_email="admin@devrats.com",
